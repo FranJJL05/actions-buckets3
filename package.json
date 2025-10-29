@@ -1,0 +1,18 @@
+{
+  "name": "actions-buckets3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test/pruebas.test.js",  
+    "docs": "jsdoc src/js/index.js -d docs", 
+    "start": "echo \"La app es estática, abre src/index.html\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^30.2.0",
+    "jsdoc": "^4.0.5"
+  }
+}
