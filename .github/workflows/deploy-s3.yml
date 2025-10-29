@@ -1,0 +1,52 @@
+# .github/workflows/deploy-s3.yml
+name: Despliegue de la Web a AWS S3
+
+on:
+  push:
+    branches:
+      - dev 
+  workflow_dispatch: 
+  
+jobs:
+  pruebas-y-subida: 
+    runs-on: ubuntu-latest 
+    steps:
+      - name: 1. Bajar mi proyecto
+        uses: actions/checkout@v4
+      
+      - name: 2. Poner Node.js (lo necesito para Jest y JSDoc)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      
+      - name: 3. Instalar las dependencias (Jest, JSDoc)
+        run: npm install
+      
+      # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
+      
+      - name: 4. Ejecutar las pruebas 
+        run: npm test 
+      
+      - name: 5. Generar la documentacion de mi JS
+        run: npm run docs 
+
+      # --- DESPLIEGUE CONTINUO (CD): La Subida a S3 ---
+      
+      - name: 6. Subir los archivos finales a mi bucket de AWS S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --delete 
+          
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }} 
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          
+          S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
+          
+          # Lo que subimos: la carpeta src (web) y docs (documentación)
+          SOURCE_DIR: './' 
+          
+          # Lo que NO vamos a subir
+          EXCLUDE: '.git* .gitignore node_modules/* package*.json package-lock.json test/* .github/*'
