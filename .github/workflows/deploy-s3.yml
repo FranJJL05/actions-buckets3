@@ -14,26 +14,23 @@ jobs:
       - name: 1. Bajar mi proyecto
         uses: actions/checkout@v4
       
-      - name: 2. Poner Node.js (lo necesito para Jest y JSDoc)
+      - name: 2. Poner Node.js e instalar dependencias
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
           cache: 'npm'
       
-      - name: 3. Instalar las dependencias (Jest, JSDoc)
-        run: npm install
-      
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
       
-      - name: 4. Ejecutar las pruebas 
-        run: npm test 
+      - name: 3. Ejecutar las pruebas 
+        run: npx jest test/pruebas.test.js
       
-      - name: 5. Generar la documentacion de mi JS
+      - name: 4. Generar la documentacion de mi JS
         run: npm run docs 
 
       # --- DESPLIEGUE CONTINUO (CD): La Subida a S3 ---
       
-      - name: 6. Subir los archivos finales a mi bucket de AWS S3
+      - name: 5. Subir los archivos finales a mi bucket de AWS S3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
           args: --acl public-read --delete 
