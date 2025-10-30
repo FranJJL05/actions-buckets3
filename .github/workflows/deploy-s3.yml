@@ -21,7 +21,9 @@ jobs:
           cache: 'npm'
       
       - name: 3. Instalar las dependencias (Jest, JSDoc)
-        run: npm install jest jsdoc
+        run: |
+          npm install -g jest
+          npm install -g jsdoc
       
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
       
