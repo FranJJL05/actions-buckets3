@@ -11,7 +11,7 @@ Este proyecto utiliza **GitHub Actions** para implementar un flujo de Integraci�
 El *workflow* de CI/CD se dispara automáticamente con cada `push` a la rama **`dev`** y realiza los siguientes pasos:
 
 1.  **Integración Continua (CI):**
-    * **Pruebas unitarias:** Se ejecutan todas las pruebas de **Jest** (en `test/pruebas.test.js`). Si fallan, el despliegue se detiene.
+    * **Pruebas unitarias:** Se ejecutan todas las pruebas de **Mocha** (en `test/pruebas.test.js`). Si fallan, el despliegue se detiene.
     * **Documentación:** Se genera la documentación técnica del código fuente usando **JSDoc**.
 2.  **Despliegue Continuo (CD):**
     * Sincroniza los archivos web (`src/`) y la documentación generada (`docs/`) al *bucket* configurado en AWS S3.
@@ -20,8 +20,8 @@ El *workflow* de CI/CD se dispara automáticamente con cada `push` a la rama **`
 
 | Recurso | Enlace |
 | :--- | :--- |
-| **Aplicación Desplegada** | https://docs.aws.amazon.com/es_es/vpc/latest/privatelink/vpc-endpoints-s3.html |
-| **Documentación Técnica** | https://docs.aws.amazon.com/es_es/vpc/latest/privatelink/vpc-endpoints-s3.html/docs/index.html |
+| **Aplicación Desplegada** | http://daw-s3-fran-1.s3-website-us-east-1.amazonaws.com/index.html |
+| **Documentación Técnica** | http://daw-s3-fran-1.s3-website-us-east-1.amazonaws.com/docs/index.html |
 
 ## Estructura del Repositorio
 
