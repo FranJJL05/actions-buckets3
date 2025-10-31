@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test/pruebas.test.js",  
-    "docs": "jsdoc src/js/index.js -d docs", 
+    "test": "node test/pruebas.test.js",
+    "docs": "jsdoc src/js/index.js -d docs",
     "start": "echo \"La app es estática, abre src/index.html\""
   },
   "keywords": [],
