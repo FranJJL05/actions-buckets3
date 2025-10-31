@@ -23,7 +23,7 @@ jobs:
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
       
       - name: 4. Ejecutar las pruebas 
-        run: nPM TEST
+        run: npm test
       
       - name: 5. Generar la documentacion de mi JS
         run: npm run docs
