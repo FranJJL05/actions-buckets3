@@ -14,10 +14,10 @@ jobs:
       - name: 1. Bajar mi proyecto
         uses: actions/checkout@v5.0.0
       
-      - name: 2. Poner Node.js (lo necesito para Jest y JSDoc)
+      - name: 2. Poner Node.js
         uses: actions/setup-node@v6.0.0
       
-      - name: 3. Instalar las dependencias (Jest, JSDoc)
+      - name: 3. Instalar las dependencias (Mocha, Chai, JSDoc)
         run: npm install
       
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
@@ -26,7 +26,7 @@ jobs:
         run: npm test
       
       - name: 5. Generar la documentacion de mi JS
-        run: npm run docs
+        run: npx jsdoc src/js/index.js -d docs
 
       # --- DESPLIEGUE CONTINUO (CD): La Subida a S3 ---
       
