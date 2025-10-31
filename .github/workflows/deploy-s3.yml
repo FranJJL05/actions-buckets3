@@ -57,8 +57,8 @@ jobs:
             --exclude "node_modules/*" \
             --exclude "package*.json" \
             --exclude "test/*" \
-            --exclude ".github/*" \
-            --acl public-read
+            --exclude ".github/*" 
+            # ELIMINAMOS ESTA LÍNEA: --acl public-read
           
           # Aseguramos que index.html sea reconocido correctamente
-          aws s3 cp index.html s3://${{ secrets.S3_BUCKET_NAME }}/index.html --content-type text/html --acl public-read
+          aws s3 cp index.html s3://${{ secrets.S3_BUCKET_NAME }}/index.html --content-type text/html
