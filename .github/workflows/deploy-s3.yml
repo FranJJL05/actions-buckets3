@@ -12,12 +12,10 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
       - name: 1. Bajar mi proyecto
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
       
       - name: 2. Poner Node.js (lo necesito para Jest y JSDoc)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
+        uses: actions/setup-node@v6.0.0
       
       - name: 3. Instalar las dependencias (Jest, JSDoc)
         run: npm install
@@ -25,16 +23,16 @@ jobs:
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
       
       - name: 4. Ejecutar las pruebas 
-        run: npx jest test/pruebas.test.js
+        run: nPM TEST
       
       - name: 5. Generar la documentacion de mi JS
-        run: npx jsdoc src/js/index.js -d docs
+        run: npm run docs
 
       # --- DESPLIEGUE CONTINUO (CD): La Subida a S3 ---
       
       # 6. Configurar las credenciales de AWS (¡Método oficial para el token!)
       - name: 6. Configurar Credenciales de AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,4 +1,6 @@
 // test/pruebas.test.js
+const test = require('node:test');
+const assert = require('node:assert');
 
 // Importa la clase del archivo de código fuente
 const { GestorTareas } = require('../src/js/index.js');
