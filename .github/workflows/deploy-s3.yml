@@ -22,9 +22,16 @@ jobs:
       
       # --- INTEGRACIÓN CONTINUA (CI): Chequeos de calidad ---
       
-      - name: 4. Ejecutar las pruebas 
-        run: npm test
+      - name: 4. Forzar permisos de Ejecución
+        run: |
+          # Forzar permisos para el binario de Mocha
+          chmod +x ./node_modules/.bin/mocha
+          # Forzar permisos para el binario de JSDoc
+          chmod +x ./node_modules/.bin/jsdoc
       
+      - name: 4.1 Ejecutar las pruebas 
+        run: npx mocha test/pruebas.test.js
+
       - name: 5. Generar la documentacion de mi JS
         run: npx jsdoc src/js/index.js -d docs
 
