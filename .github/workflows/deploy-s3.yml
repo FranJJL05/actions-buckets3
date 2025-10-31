@@ -39,7 +39,7 @@ jobs:
       
       # 6. Configurar las credenciales de AWS (¡Método oficial para el token!)
       - name: 6. Configurar Credenciales de AWS
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
