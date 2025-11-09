@@ -50,8 +50,6 @@ jobs:
       - name: 7. Sincronizando el contenido al bucket
         run: |
           aws s3 sync ./src s3://${{ secrets.S3_BUCKET_NAME }} --delete
-
-
           echo "Sincronizando la documentación DOCS a la carpeta /docs del bucket..."
-          # 2. SINCRONIZAR la documentación (que se genera en la raíz del repo)
-          aws s3 sync ./docs s3://${{ secrets.S3_BUCKET_NAME }}/docs \--delete
+          aws s3 sync ./docs s3://${{ secrets.S3_BUCKET_NAME }}/docs --delete
+      
