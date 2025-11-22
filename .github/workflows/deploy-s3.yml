@@ -55,7 +55,6 @@ jobs:
           echo "Sincronizando el contenido de SRC a la raíz del bucket..."
           # 1. SINCRONIZAR el CONTENIDO DE SRC (donde está index.html) a la RAÍZ del bucket
           aws s3 sync ./src s3://${{ secrets.S3_BUCKET_NAME }} \
-            --acl public-read \
             --delete \
             --exclude ".git/*" \
             --exclude ".gitignore" \
@@ -68,5 +67,4 @@ jobs:
           echo "Sincronizando la documentación DOCS a la carpeta /docs del bucket..."
           # 2. SINCRONIZAR la documentación (que se genera en la raíz del repo)
           aws s3 sync ./docs s3://${{ secrets.S3_BUCKET_NAME }}/docs \
-            --acl public-read \
             --delete
