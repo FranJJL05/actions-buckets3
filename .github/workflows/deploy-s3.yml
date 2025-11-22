@@ -47,23 +47,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       # 7. Subir los archivos finales a mi bucket de AWS S3 (Usando AWS CLI nativa)
-      - name: 7. Subir archivos a S3
+      - name: 7.1 Sincronizando src al bucket
+        run: aws s3 sync ./src s3://${{ secrets.S3_BUCKET_NAME }} --delete
+      
+      - name: 7.2 Sincronizando docs al bucket
         run: |
-          echo "Sincronizando el contenido de SRC a la raíz del bucket..."
-          # 1. SINCRONIZAR el CONTENIDO DE SRC (donde está index.html) a la RAÍZ del bucket
-          aws s3 sync ./src s3://${{ secrets.S3_BUCKET_NAME }} \
-            --acl public-read \
-            --delete \
-            --exclude ".git/*" \
-            --exclude ".gitignore" \
-            --exclude "node_modules/*" \
-            --exclude "package*.json" \
-            --exclude "test/*" \
-            --exclude ".github/*" 
-            # Las exclusiones aplican a archivos dentro de ./src ahora
-
           echo "Sincronizando la documentación DOCS a la carpeta /docs del bucket..."
-          # 2. SINCRONIZAR la documentación (que se genera en la raíz del repo)
-          aws s3 sync ./docs s3://${{ secrets.S3_BUCKET_NAME }}/docs \
-            --acl public-read \
-            --delete
+          aws s3 sync ./docs s3://${{ secrets.S3_BUCKET_NAME }}/docs --delete
